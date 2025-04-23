@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './InstagramWiper.module.css';
+import styles from './Instagramwiper.module.css';
 
 const InstagramWiper = () => {
   const instagramUrl = "https://www.instagram.com/casalarbatista/";
