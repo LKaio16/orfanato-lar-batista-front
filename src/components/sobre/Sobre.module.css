@@ -1,0 +1,75 @@
+.sobreContainer {
+  background-image: url('/assets/Backimage.png'); 
+  background-size: cover; 
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 0px 0px 65px;
+  color: #333;
+  font-family: 'Arial', sans-serif;
+  height: 500px;
+}
+
+.infoContainer {
+  background: white;
+  padding: 10px 25px;
+  border-radius: 15px;
+  width: fit-content;
+  margin: 2px -15px auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  flex-direction: column;
+  display: inline-flex;
+  margin-top: auto;
+}
+
+.infoContainer h2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  font-family: 'Poppins', sans-serif;
+}
+
+.infoContainer p {
+  display: -webkit-inline-box;
+  -webkit-box-orient: vertical;
+  font-size: 14px;
+  line-height: 1.6;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 35px;
+  margin-left: 20px;
+}
+
+.redesSociais {
+  background-color:white; 
+  padding: 15px 20px;
+  border-radius: 15px;
+  width: 328px;
+  margin: 25px -10px auto;
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+  text-align: left;
+}
+
+.redesSociais h3 {
+  font-size: 14px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  justify-self: anchor-center;
+  font-family: 'Poppins', sans-serif;
+}
+
+.redesSociais a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #333;
+  font-size: 14px;
+  font-weight: bold;
+  justify-self: center;
+  font-family: 'Poppins', sans-serif;
+  margin-bottom: 15px;
+}
+
+.iconeInstagram {
+  color: #e1306c;
+  font-size: 24px;
+  margin-right: 10px;
+}

@@ -1,0 +1,172 @@
+.hero {
+    width: 100%;
+    min-height: 80vh;
+    display: flex;
+    align-items: center;
+    padding: 0px;
+    background-color: #ffffff;
+    position: relative; /* Adicione isso para posicionamento relativo */
+    
+  }
+  
+  .heroContent {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    z-index: 1;
+    padding: 0px 50px;
+    overflow: hidden;
+  }
+  
+  .textContainer {
+    flex: 1;
+    min-width: 280px;
+  }
+  
+  .textContainer h1 {
+    font-size: clamp(2rem, 5vw, 4.5rem);
+    color: #333;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    max-width: 90%;
+    font-family: 'Rowdies', cursive;
+    font-weight: 400;
+  }
+  
+  .textContainer p {
+    font-size: clamp(1rem, 2.5vw, 1.1rem);
+    color: #555;
+    margin-bottom: 40px;
+    line-height: 1.6;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 100;
+    max-width: 90%;
+  }
+  
+  .donateButton {
+    background-color: #009EFF;
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 30px;
+    font-size: 1rem;
+    font-family: 'Rowdies', cursive;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 240px;
+    height: 55px;
+    text-transform: uppercase;
+  }
+  
+  .donateButton:hover {
+    background-color: #6a759e;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+  }
+  
+  .imageContainer {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+    min-width: 280px;
+  }
+  
+  .heroImage {
+    max-width: 110%;
+    height: auto;
+    margin-bottom: 300px;
+  }
+  
+  @media (max-width: 768px) {
+    .hero {
+      padding: 0px;
+      min-height: auto;
+    }
+  
+    .heroContent {
+      flex-direction: column;
+      gap: 30px;
+      
+    }
+  
+    .donateButton {
+      padding: 12px 30px;
+      width: 100%;
+      max-width: 300px;
+    }
+  }
+
+  .circleDecoration {
+    position: absolute;
+    top: 20px;
+    left: -50px;
+    width: 130px;
+    height: 130px;
+    background-color: #E3E2CD;
+    border-radius: 50%;
+    opacity: 0.6;
+    z-index: 0;
+}
+  
+
+.squareDecoration {
+    position: absolute;
+    top: 80%;
+    right: -600px;
+    width: 900px;
+    height: 600px;
+    background-color: #009EFF;
+    border-radius: 200px;
+    z-index: 0;
+    transform: translateY(-50%) rotate(-40deg);
+}
+
+
+/* Estilos para telas menores que 880px */
+@media (max-width: 880px) {
+    .hero {
+    
+        min-height: auto;
+        
+    }
+
+    .heroContent {
+        flex-direction: column; /* Imagem em cima */
+        gap: 10px;
+    }
+
+    .heroImage {
+        max-width: 110%;
+        margin-bottom: 0px;
+        height: auto;
+      }
+
+    .imageContainer {
+        order: -1; /* Garante que a imagem fique em cima */
+        margin-bottom: 20px;
+        max-width: 400px;
+    }
+
+    .textContainer {
+       margin-bottom:90px ;
+      }
+
+    .circleDecoration {
+        display: none; /* Remove o círculo */
+    }
+
+    .squareDecoration {
+        top: auto;
+        bottom: 330px;
+        right: -400px;
+        width: 600px;
+        height: 400px;
+        transform: rotate(-30deg);
+        border-radius: 100px;
+    }
+
+   
+}

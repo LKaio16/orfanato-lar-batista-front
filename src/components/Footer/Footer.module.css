@@ -1,0 +1,212 @@
+/* Footer.module.css */
+
+/* ----- Área Principal Azul ----- */
+.footerMain {
+    background-color: #009EFF; /* Azul principal */
+    padding: 60px 0px; /* Espaçamento interno vertical */
+    color: white; /* Cor do texto padrão */
+}
+
+.footerContainer {
+    max-width: 1100px; /* Largura máxima */
+    margin: 0 auto; /* Centraliza */
+    padding: 0 60px; /* Espaçamento lateral */
+    display: flex;
+    justify-content: space-between; /* Espaça as colunas */
+    gap: 40px; /* Espaço entre colunas */
+    flex-wrap: wrap; /* Permite que as colunas quebrem em telas menores */
+}
+
+/* ----- Coluna de Contato ----- */
+.contactInfo {
+    flex: 1.5; /* Faz a coluna de contato ser um pouco maior */
+    min-width: 280px; /* Largura mínima antes de quebrar */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.contactItem {
+    display: flex;
+    align-items: center; /* Alinha ícone e texto verticalmente */
+    margin-bottom: 25px; /* Espaço entre os itens de contato */
+    font-family: 'Manrope', sans-serif;
+}
+
+.contactItem:last-child {
+    margin-bottom: 0; /* Remove margem do último item */
+}
+
+.contactIconWrapper {
+    flex-shrink: 0; /* Impede que o círculo encolha */
+    width: 50px; /* Tamanho do círculo */
+    height: 50px;
+    background-color: white;
+    border-radius: 50%; /* Faz o círculo */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 18px; /* Espaço entre ícone e texto */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+}
+
+.contactIcon {
+    width: 22px; /* Tamanho do ícone dentro do círculo */
+    height: 22px;
+    object-fit: contain;
+}
+
+.contactText {
+    font-size: 1rem; /* Tamanho do texto de contato */
+    line-height: 1.5;
+    color: white; /* Garante a cor branca */
+    text-decoration: none; /* Remove sublinhado padrão de links 'a' */
+}
+
+/* Efeito hover para links de contato (email/telefone) */
+.linkEffect:hover {
+    opacity: 0.85; /* Leve transparência no hover */
+    text-decoration: underline;
+}
+
+
+/* ----- Coluna do Menu ----- */
+.footerMenu {
+    flex: 1; /* Ocupa o espaço restante */
+    min-width: 180px; /* Largura mínima */
+    padding-left: 20px; /* Pequeno espaço à esquerda */
+}
+
+.menuTitle {
+    font-size: 1.1rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    font-family: 'Manrope', sans-serif;
+    letter-spacing: 1.5px;
+    color: white;
+}
+
+.footerMenu nav {
+    display: flex;
+    flex-direction: column; /* Links um abaixo do outro */
+    align-items: flex-start; /* Alinha links à esquerda */
+}
+
+.menuLink {
+    background: none;
+    border: none;
+    color: white;
+    padding: 8px 0; /* Espaçamento vertical */
+    cursor: pointer;
+    font-size: 1rem;
+    text-align: left;
+    font-family: 'Manrope', sans-serif;
+    transition: opacity 0.3s ease;
+    opacity: 0.9;
+}
+
+.menuLink:hover {
+    opacity: 1;
+    text-decoration: underline; /* Sublinhado no hover */
+}
+
+/* ----- Barra Inferior (Copyright) ----- */
+.footerBottom {
+    background-color: #2c3e50; /* Azul escuro/Cinza */
+    padding: 20px 0px; /* Padding vertical */
+}
+
+.copyrightContainer {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.copyrightText {
+    color: #bdc3c7; /* Cinza claro */
+    font-size: 0.9rem;
+    margin: 0;
+    font-family: 'Manrope', sans-serif;
+    line-height: 1.6;
+}
+
+.githubLink {
+    color: #ecf0f1; /* Branco suave */
+    text-decoration: none;
+    font-weight: 500; /* Leve destaque */
+    margin: 0 2px; /* Pequeno espaço ao redor dos nomes */
+    transition: color 0.3s ease;
+}
+
+.githubLink:hover {
+    color: #ffffff; /* Branco total no hover */
+    text-decoration: underline;
+}
+
+
+/* ----- Responsividade ----- */
+@media (max-width: 768px) {
+    .footerContainer {
+        flex-direction: column; /* Empilha as colunas */
+        align-items: center; /* Centraliza colunas empilhadas */
+        text-align: center; /* Centraliza texto dentro das colunas */
+        gap: 40px; /* Espaço entre colunas empilhadas */
+    }
+
+    .contactInfo,
+    .footerMenu {
+        width: 100%; /* Colunas ocupam largura total */
+        max-width: 450px; /* Limita largura máxima do conteúdo */
+        padding-left: 0; /* Reseta padding */
+        align-items: center; /* Centraliza itens internos */
+    }
+
+    .contactItem {
+        justify-content: center; /* Centraliza ícone e texto */
+         /* Opcional: empilhar ícone e texto */
+        /* flex-direction: column;
+           text-align: center; */
+    }
+
+    .footerMenu nav {
+        align-items: center; /* Centraliza os links do menu */
+    }
+     .menuLink {
+        text-align: center;
+    }
+
+    .copyrightText {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .footerMain {
+        padding: 40px 0px;
+    }
+    .footerContainer {
+        gap: 30px;
+    }
+
+     .contactIconWrapper {
+        width: 45px;
+        height: 45px;
+        margin-right: 15px; /* Ajusta margem se não empilhar */
+    }
+    .contactIcon {
+        width: 20px;
+        height: 20px;
+    }
+    .contactText, .menuLink {
+        font-size: 0.95rem;
+    }
+
+     .footerBottom {
+        padding: 15px 0px;
+    }
+    .copyrightText {
+        font-size: 0.8rem;
+    }
+}

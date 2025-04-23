@@ -1,0 +1,109 @@
+/* UploadForm.module.css */
+
+.container {
+    max-width: 120vh;
+    margin: 3rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.05);
+  }
+  
+  .title {
+    text-align: center;
+    color: #333;
+    margin-bottom: 2rem;
+  }
+  
+  .inputArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .input {
+    padding: 0.6rem;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .ou {
+    color: #666;
+    font-size: 0.9rem;
+  }
+  
+  .button {
+    background: #007bff;
+    color: #fff;
+    padding: 0.6rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background 0.3s ease;
+  }
+  
+  .button:hover {
+    background: #0056b3;
+  }
+  
+  .cancelar {
+    background: #888;
+  }
+  
+  .cancelar:hover {
+    background: #666;
+  }
+  
+  .galeria {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  
+  .card {
+    position: relative;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 6px rgba(0, 0, 0, 0.1);
+    background: #f9f9f9;
+  }
+  
+  .imagem {
+    width: 100%;
+    max-width: 300px;
+    height: 200px;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    display: block;
+  }
+  
+  .btnExcluir {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 4px 8px;
+    font-size: 0.8rem;
+    color: #fff;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .btnExcluir:hover {
+    background: rgba(0, 0, 0, 0.8);
+  }
+  
+  .aviso {
+    text-align: center;
+    font-style: italic;
+    color: #888;
+  }
+  

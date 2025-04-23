@@ -1,0 +1,230 @@
+/* ----- Estilos Gerais ----- */
+.section {
+  padding: 120px 0px;
+  background-color: #fff; /* Fundo branco */
+  overflow: hidden; /* Evita que decorações grandes causem scroll horizontal */
+}
+
+.container {
+  max-width: 1100px; /* Largura máxima */
+  margin: 0 auto; /* Centraliza */
+  padding: 0 40px; /* Espaçamento lateral */
+  display: flex;
+  align-items: center; /* Alinha itens verticalmente */
+  gap: 60px; /* Espaço entre as colunas */
+}
+
+/* ----- Coluna da Imagem ----- */
+.imageColumn {
+  flex: 1; /* Ocupa metade do espaço */
+  display: flex;
+  justify-content: center; /* Centraliza o wrapper da imagem */
+}
+
+.instagramIcon{
+  width: 25px;
+  padding-right: 10px;
+}
+
+.imageWrapper {
+  position: relative; /* Contexto para elementos decorativos */
+  max-width: 450px; /* Limite para a imagem */
+  width: 100%;
+}
+
+.image {
+  display: block; /* Remove espaço extra abaixo da imagem */
+  width: 100%;
+  border-radius: 15px; /* Bordas arredondadas */
+  position: relative; /* Para sobrepor decorações */
+  z-index: 2;
+}
+
+/* ----- Elementos Decorativos (Simplificados) ----- */
+.deco {
+  position: absolute;
+  z-index: 1; /* Fica atrás da imagem */
+  background-color: #009EFF; /* Cor azul */
+  opacity: 0.9; /* Leve transparência */
+}
+
+.decoShape1 { /* Forma retangular arredondada */
+  width: 130px;
+  height: 100px;
+  border-radius: 25px;
+  top: -30px;
+  left: -50px;
+  transform: rotate(-15deg);
+}
+
+.decoShape2 { /* Círculo */
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  bottom: -40px;
+  left: -20px;
+}
+
+/* Para as linhas e curvas complexas, SVG seria a melhor abordagem */
+/* .decoLines { ... } */
+
+
+/* ----- Coluna do Texto ----- */
+.textColumn {
+  flex: 1; /* Ocupa a outra metade */
+}
+
+.smallTitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #009EFF;
+  margin-bottom: 15px;
+  font-family: 'Manrope', sans-serif;
+}
+
+.bigTitle {
+  font-size: clamp(2.2rem, 4.5vw, 3.2rem); /* Tamanho grande e responsivo */
+  color: #343434; /* Cinza escuro */
+  margin: 0 0 25px 0;
+  font-family: 'Rowdies', cursive; /* Fonte Rowdies */
+  font-weight: 700; /* Peso da fonte */
+  line-height: 1.2;
+  text-align: left;
+}
+
+.paragraph {
+  font-size: 1rem;
+  color: #555; /* Cinza médio para parágrafos */
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-family: 'Manrope', sans-serif; /* Fonte padrão */
+  max-width: 500px; /* Limita a largura para melhor leitura */
+}
+
+/* ----- Botão ----- */
+
+.buttonContent{
+  display: flex;
+  align-items: center;
+}
+.ctaButton {
+  margin-top: 40px; /* Espaço acima do botão */
+  padding: 15px 30px;
+  background-color: white;
+  border: 1px solid #ddd; /* Borda sutil */
+  border-radius: 25px; /* Bordas bem arredondadas */
+  cursor: pointer;
+  font-weight: 100;
+  color: #555; /* Cor do texto do botão */
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  font-family: 'Rowdies', cursive;
+  display: inline-block; /* Para que margin-top funcione corretamente */
+  text-decoration: none;
+}
+
+
+.ctaButton:hover {
+  border-color: #009EFF; /* Muda cor da borda para azul */
+  color: #009EFF; /* Muda cor do texto para azul */
+  background-color: rgba(0, 158, 255, 0.05); /* Leve fundo azul quase transparente (opcional) */
+}
+
+/* ----- Responsividade ----- */
+@media (max-width: 992px) {
+  .container {
+    flex-direction: column; /* Empilha as colunas */
+    gap: 50px; /* Espaço entre imagem e texto */
+    text-align: center; /* Centraliza texto quando empilhado */
+  }
+
+  .imageColumn {
+    order: 1; /* Imagem vem primeiro */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .imageWrapper {
+     max-width: 400px; /* Limita um pouco a imagem */
+     margin-bottom: 20px; /* Espaço extra abaixo da imagem */
+  }
+
+   .decoShape1 {
+      left: -30px;
+   }
+   .decoShape2 {
+      left: 0;
+      bottom: -30px;
+   }
+
+  .textColumn {
+    order: 2; /* Texto vem depois */
+    display: flex; /* Permite centralizar itens */
+    flex-direction: column;
+    align-items: center; /* Centraliza o conteúdo (títulos, parágrafos, botão) */
+  }
+
+  .paragraph {
+    max-width: none; /* Remove limite de largura */
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+    padding: 60px 0px;
+  }
+  .bigTitle {
+      font-size: clamp(2rem, 6vw, 2.8rem); /* Ajusta tamanho do título */
+  }
+   .imageWrapper {
+      max-width: 350px;
+  }
+  .paragraph {
+      font-size: 0.95rem;
+  }
+  .ctaButton {
+     
+     font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .section {
+    padding: 40px 0px;
+  }
+   .container {
+       gap: 30px;
+   }
+   .bigTitle {
+       font-size: clamp(1.8rem, 7vw, 2.4rem);
+   }
+    .imageWrapper {
+      max-width: 90%; /* Usa percentual para se adaptar melhor */
+   }
+    /* Esconde decorações em telas muito pequenas (opcional) */
+   /* .deco {
+       display: none;
+   } */
+    .decoShape1 {
+       width: 100px;
+       height: 80px;
+       left: -15px;
+       top: -20px;
+   }
+    .decoShape2 {
+       width: 70px;
+       height: 70px;
+       bottom: -20px;
+       left: 5px;
+   }
+
+    .paragraph {
+       font-size: 0.9rem;
+   }
+    .ctaButton {
+      
+       font-size: 0.85rem;
+   }
+}

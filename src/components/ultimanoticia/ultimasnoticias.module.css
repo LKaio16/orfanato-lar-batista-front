@@ -1,0 +1,182 @@
+/* Estilos gerais para a seção */
+.section {
+  width: 100%;
+  padding: 80px 0px; /* Ajuste o padding conforme necessário */
+  background-color: #f9f9f9; /* Fundo cinza claro */
+}
+
+/* Container principal para centralizar o conteúdo */
+.container {
+  max-width: 1100px; /* Largura máxima do conteúdo */
+  margin: 0 auto; /* Centraliza */
+  padding: 0 40px; /* Espaçamento lateral */
+  text-align: center; /* Centraliza os títulos e o botão */
+}
+
+/* Título menor (NOS CONHEÇA) */
+.smallTitle {
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #009EFF;
+  margin-bottom: 15px;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Título maior (Ultimas Noticias) */
+.bigTitle {
+  font-size: clamp(2.3rem, 2.5vw, 5rem);
+    color: #343434;
+    margin: 0;
+    font-family: 'Rowdies', cursive;
+    font-weight: 400;
+    line-height: 1.3;
+}
+
+/* Container para os cards (Grid) */
+.cardsContainer {
+  display: grid;
+  /* Cria 3 colunas de largura igual */
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px; /* Espaçamento entre os cards */
+  margin-top: 40px; /* Espaço acima dos cards */
+}
+
+/* Estilo individual do card */
+.card {
+  background: white; /* Fundo branco */
+  border-radius: 10px; /* Bordas arredondadas */
+  padding: 25px;
+  padding-top: 50px; /* Mais padding no topo para a tag não sobrepor o título */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.07); /* Sombra suave */
+  text-align: left; /* Alinha texto à esquerda dentro do card */
+  position: relative; /* Necessário para posicionar a tag */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px); /* Efeito sutil ao passar o mouse */
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Tag azul no canto superior esquerdo */
+.cardTag {
+  position: absolute; /* Posicionamento absoluto relativo ao .card */
+  top: 15px;
+  left: 15px;
+  background-color: #009EFF; /* Fundo azul */
+  color: white; /* Texto branco */
+  padding: 4px 15px;
+  border-radius: 10px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  text-transform: uppercase; /* Opcional: deixar em maiúsculas */
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Título dentro do card */
+.cardTitle {
+  font-size: 1.1rem;
+  color: #343434; /* Cor escura para o texto */
+  margin: 0 0 25px 0; /* Espaçamento abaixo do título */
+  font-family: 'Rowdies', cursive;
+  font-weight: 200;
+  line-height: 1.4;
+  height: 110px;
+}
+
+/* Data dentro do card */
+.cardDate {
+  font-size: 0.85rem;
+  color: #888; /* Cor cinza para a data */
+  font-family: 'Manrope', sans-serif;
+  text-align: right; /* Alinha data à direita */
+  margin-top: auto; /* Empurra a data para baixo se houver espaço */
+}
+
+/* Botão "VER MAIS" */
+.verMaisButton {
+  margin-top: 50px; /* Espaço acima do botão */
+  padding: 15px 50px;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd; /* Borda sutil */
+  border-radius: 25px; /* Bordas bem arredondadas */
+  cursor: pointer;
+  font-weight: 400;
+  color: #555; /* Cor do texto do botão */
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+  font-family: 'Rowdies', cursive;
+}
+
+.verMaisButton:hover {
+  background-color: #f0f0f0; /* Leve mudança de cor no hover */
+  border-color: #ccc;
+}
+
+/* Texto de erro */
+.errorText {
+  color: #D91E18; /* Vermelho para indicar erro */
+  margin-top: 20px;
+}
+
+
+/* Responsividade */
+@media (max-width: 992px) {
+  .cardsContainer {
+      /* 2 colunas em telas médias */
+      grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .section {
+      padding: 60px 0px;
+  }
+   .bigTitle {
+      margin-bottom: 40px;
+  }
+  .cardsContainer {
+      /* 1 coluna em telas menores */
+      grid-template-columns: 1fr;
+      gap: 20px; /* Diminui o espaço entre cards */
+  }
+   .card {
+      padding: 20px;
+      padding-top: 45px; /* Ajusta padding para tag */
+  }
+   .cardTitle {
+       font-size: 1rem;
+       margin-bottom: 20px;
+       height: auto;
+   }
+   .cardDate {
+       font-size: 0.8rem;
+   }
+   .verMaisButton {
+      margin-top: 40px;
+  }
+}
+
+@media (max-width: 480px) {
+   .section {
+      padding: 40px 0px;
+  }
+  .smallTitle {
+      font-size: 0.8rem;
+  }
+  .bigTitle {
+      font-size: 1.5rem; /* Diminui ainda mais o título principal */
+      margin-bottom: 30px;
+  }
+  .card {
+      padding: 15px;
+      padding-top: 40px;
+  }
+  .cardTag {
+      font-size: 0.7rem;
+      padding: 3px 8px;
+      top: 10px;
+      left: 10px;
+  }
+}

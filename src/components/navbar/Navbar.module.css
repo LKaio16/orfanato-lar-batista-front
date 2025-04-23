@@ -1,0 +1,316 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 40px;
+  background-color: #fff;
+  position: sticky;
+  top: 0;
+  
+  z-index: 100;
+  transition: all 0.3s ease;
+  
+}
+
+.navbar.scrolling {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Logo desktop (sempre visível) */
+.logoDesktop {
+  display: block;
+  cursor: pointer;
+}
+
+/* Logo mobile (inicialmente escondida) */
+.logoMobile {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 102;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+/* Quando o menu está aberto, mostra a logo mobile */
+.logoMobile.menuLogoVisible {
+  opacity: 1;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  z-index: 101;
+}
+
+.logo {
+  width: 65px;
+  height: auto;
+}
+
+.navLinks {
+  display: flex;
+  gap: 30px;
+}
+
+.link {
+  position: relative;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: none;
+  color: #222;
+  font-weight: bold;
+  font-size: 13px;
+  font-family: 'Manrope', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px; 
+  width: 0%;
+  height: 2px;
+  background-color: #00c60d;
+  transition: width 0.3s ease;
+}
+
+.link:hover {
+  color: #00c60d;
+}
+
+.link:hover::after {
+  width: 100%;
+}
+
+.navRight {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  z-index: 101;
+}
+
+.donateBtn {
+  background-color: transparent;
+  color: #7E8AB8;
+  border: 1px solid rgba(126, 138, 184, 0.3);
+  padding: 10px 20px;
+  border-radius: 20px;
+  font-family: 'Rowdies', cursive;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1);
+  font-weight: 100;
+  width: 150px;
+  height: 50px;
+}
+
+.donateBtn:hover {
+  background-color: #7E8AB8;
+  color: white;
+}
+
+.LinguagemSelector {
+  position: relative;
+}
+
+.langButton {
+  background: none;
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.langDropdown {
+  display: none;
+  position: absolute;
+  top: 40px;
+  right: 0;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  flex-direction: column;
+  min-width: 80px;
+  z-index: 102;
+}
+
+.langOption {
+  padding: 5px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.langOption:hover {
+  background-color: #f0f0f0;
+}
+
+.showDropdown {
+  display: flex;
+}
+
+.menuToggle {
+  display: none;
+  width: 30px;
+  height: 24px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 101;
+  padding: 0;
+}
+
+.menuToggle span {
+  display: block;
+  position: absolute;
+  height: 3px;
+  width: 100%;
+  background: #222;
+  border-radius: 3px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: .25s ease-in-out;
+}
+
+.menuToggle span:nth-child(1) {
+  top: 0px;
+}
+
+.menuToggle span:nth-child(2) {
+  top: 10px;
+}
+
+.menuToggle span:nth-child(3) {
+  top: 20px;
+}
+
+.menuToggle.menuActive span:nth-child(1) {
+  top: 10px;
+  transform: rotate(45deg);
+}
+
+.menuToggle.menuActive span:nth-child(2) {
+  opacity: 0;
+}
+
+.menuToggle.menuActive span:nth-child(3) {
+  top: 10px;
+  transform: rotate(-45deg);
+}
+
+.menuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 99;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.menuOverlay {
+  opacity: 1;
+  visibility: visible;
+}
+
+@media screen and (max-width: 880px) {
+  .navbar {
+    padding: 12px 20px;
+  }
+  
+  .logoDesktop {
+    position: relative;
+    z-index: 101;
+  }
+  
+  .logoMobile {
+    display: block;
+  }
+  
+  .menuToggle {
+    display: block;
+    order: 2;
+  }
+  
+  .navLeft {
+    gap: 0;
+  }
+  
+  .navLinks {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 80%;
+    max-width: 300px;
+    height: 100vh;
+    background: white;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 100px 30px 30px;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 100;
+    gap: 20px;
+  }
+  
+  .navLinks.menuOpen {
+    transform: translateX(0);
+  }
+  
+  .navRight {
+    position: fixed;
+    bottom: 50px;
+    left: 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    width: calc(80% - 60px);
+    max-width: 300px;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    flex-direction: column-reverse;
+  }
+  
+  .navRight.menuOpen {
+    transform: translateX(0);
+    left: 30px;
+  }
+  
+  .link {
+    font-size: 16px;
+    padding: 10px 0;
+    width: 100%;
+    text-align: left;
+  }
+  
+  .donateBtn {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  .LinguagemSelector {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

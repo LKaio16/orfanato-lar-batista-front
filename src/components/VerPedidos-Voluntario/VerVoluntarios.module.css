@@ -1,0 +1,67 @@
+.container {
+    padding: 20px;
+    background-color: #f9f9f9;
+  }
+  
+  .titulo {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .card {
+    background-color: #ffffff;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card h3 {
+    margin-top: 0;
+    color: #1a1a1a;
+  }
+  
+  .card p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #444;
+  }
+  
+  .botoes {
+    margin-top: 15px;
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+  
+  .botaoRemover {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .botaoRemover:hover {
+    background-color: #c0392b;
+  }
+  
+  .botaoEmail {
+    background-color: #3498db;
+    color: white;
+    text-decoration: none;
+    padding: 10px 14px;
+    border-radius: 6px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+  }
+  
+  .botaoEmail:hover {
+    background-color: #2980b9;
+  }
+  

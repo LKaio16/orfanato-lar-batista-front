@@ -1,0 +1,272 @@
+/* containervoluntario.module.css */
+
+/* ----- Estilos Gerais da Seção (baseado nos outros módulos) ----- */
+.section {
+  padding: 120px 0; /* Padding consistente */
+  background-color: #f9f9f9; /* Fundo cinza claro consistente */
+}
+
+.container {
+  max-width: 1100px; /* Largura máxima consistente */
+  margin: 0 auto; /* Centraliza */
+  padding: 0 40px; /* Espaçamento lateral */
+  display: flex;
+  align-items: flex-start; /* Alinha colunas no topo */
+  gap: 50px; /* Espaço entre texto e formulário */
+}
+
+/* ----- Coluna de Texto (Esquerda) ----- */
+.textColumn {
+  flex: 1; /* Ocupa espaço disponível */
+  min-width: 300px; /* Largura mínima */
+  padding-right: 20px; /* Pequeno espaço à direita */
+  /* text-align: left; Se o conteúdo principal for alinhado à esquerda */
+}
+
+/* Reutilizando estilos de título e parágrafo */
+.smallTitle { /* Pode ser usado para o título "Por que se voluntariar?" */
+  font-size: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  color: #009EFF;
+  margin-bottom: 15px;
+  font-family: 'Manrope', sans-serif;
+}
+
+.bigTitle { /* Título principal da seção "Faça a diferença..." */
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  color: #343434;
+  margin: 0 0 25px 0; /* Espaço abaixo do título principal */
+  font-family: 'Rowdies', sans-serif;
+  font-weight: 400; /* Ajustado para 400 */
+  line-height: 1.3;
+  text-align: left;
+}
+
+.paragraph { /* Parágrafos gerais */
+  font-size: 1rem;
+  color: #555;
+  line-height: 1.7;
+  margin-bottom: 20px;
+  font-family: 'Manrope', sans-serif;
+}
+
+/* Estilo específico para o bloco "Por que se voluntariar?" */
+.whyVolunteer {
+  margin-top: 40px; /* Espaço acima deste bloco */
+  padding-top: 30px; /* Padding interno no topo */
+  border-top: 1px solid #eee; /* Linha separadora sutil */
+}
+
+
+/* ----- Coluna do Formulário (Direita) ----- */
+.formColumn {
+  flex: 1.2; /* Faz o formulário ser um pouco mais largo */
+  min-width: 320px;
+}
+
+.form {
+  width: 100%;
+  display: flex;
+  flex-direction: column; /* Organiza os elementos do formulário verticalmente */
+}
+
+/* Estilo para os labels */
+.form label {
+  font-size: 0.9rem;
+  color: #555;
+  font-weight: 600;
+  margin-bottom: 8px; /* Espaço entre o label e o input */
+  font-family: 'Manrope', sans-serif;
+}
+
+
+/* Estilo base para inputs e textarea (consistente com Contato) */
+.inputField,
+.textarea {
+  display: block;
+  width: 100%;
+  padding: 16px 20px;
+  margin-bottom: 20px; /* Espaço abaixo */
+  border: none;
+  border-radius: 10px;
+  background-color: #fff;
+  font-size: 1rem;
+  font-family: 'Manrope', sans-serif;
+  color: #333;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.3s ease;
+  box-sizing: border-box;
+}
+
+.inputField::placeholder,
+.textarea::placeholder {
+  color: #a0a0a0;
+  opacity: 1;
+}
+
+/* Efeito no foco (consistente com Contato) */
+.inputField:focus,
+.textarea:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 158, 255, 0.4), 0 3px 8px rgba(0, 0, 0, 0.05);
+}
+
+.textarea {
+  min-height: 130px; /* Ajuste se necessário */
+  resize: vertical;
+  line-height: 1.6;
+}
+
+/* Grupo de Checkboxes */
+.checkboxGroup {
+  display: flex;
+  gap: 20px; /* Espaço entre os checkboxes */
+  margin-bottom: 20px; /* Espaço abaixo do grupo */
+  flex-wrap: wrap; /* Permite quebra de linha em telas pequenas */
+}
+
+.checkboxGroup label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 1rem; /* Tamanho do texto do checkbox */
+  cursor: pointer;
+  font-weight: 400; /* Ajuste o peso conforme seu design */
+}
+
+/* Estilo para o input real do checkbox (pode precisar de estilização customizada se quiser um visual diferente) */
+.checkboxGroup input[type="checkbox"] {
+  cursor: pointer;
+  /* Adicione estilos customizados aqui se necessário */
+}
+
+
+/* ----- Botão de Envio (consistente com Contato) ----- */
+.submitButton {
+  width: 100%; /* Ocupa a largura total */
+  padding: 16px 20px;
+  background-color: #009EFF; /* Azul principal */
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
+  margin-top: 10px; /* Espaço acima */
+}
+
+.submitButton:hover:not(:disabled) {
+  background-color: #007fcc; /* Tom de azul mais escuro */
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* ----- Mensagens de Status (consistente com Contato) ----- */
+.successMessage,
+.errorMessage {
+  text-align: center;
+  padding: 12px 15px;
+  margin: 0 0 20px 0; /* Espaço abaixo da mensagem, antes do botão */
+  border-radius: 8px;
+  font-size: 0.95rem;
+  font-family: 'Manrope', sans-serif;
+}
+
+.successMessage {
+  background-color: #d4edda; /* Verde suave */
+  color: #155724; /* Verde escuro */
+  border: 1px solid #c3e6cb;
+}
+
+.errorMessage {
+  background-color: #f8d7da; /* Vermelho suave */
+  color: #721c24; /* Vermelho escuro */
+  border: 1px solid #f5c6cb;
+}
+
+
+/* ----- Responsividade (baseado nos outros módulos) ----- */
+@media (max-width: 992px) {
+  .container {
+      flex-direction: column; /* Empilha as colunas */
+      align-items: center; /* Centraliza conteúdo */
+      gap: 40px;
+      padding: 0 40px; /* Ajusta padding lateral */
+  }
+  .textColumn,
+  .formColumn {
+      width: 100%; /* Colunas ocupam largura total */
+      padding-right: 0; /* Remove padding */
+      text-align: center; /* Centraliza texto na coluna de texto */
+  }
+   .bigTitle {
+       text-align: center;
+   }
+   .whyVolunteer {
+      text-align: left; /* Mantém o texto "Por que voluntariar" alinhado à esquerda */
+      max-width: 600px; /* Limita a largura para melhor legibilidade */
+      margin-left: auto;
+      margin-right: auto;
+   }
+   .checkboxGroup {
+      justify-content: center; /* Centraliza os checkboxes */
+   }
+  .submitButton {
+      width: auto; /* Botão volta ao tamanho do conteúdo */
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      min-width: 180px; /* Largura mínima */
+      margin-top: 20px; /* Mais espaço acima */
+  }
+   .successMessage,
+   .errorMessage {
+      margin-bottom: 25px;
+   }
+}
+
+@media (max-width: 576px) {
+  .section {
+      padding: 50px 0; /* Reduz padding vertical */
+  }
+  .bigTitle {
+      font-size: clamp(1.8rem, 6vw, 2.2rem);
+  }
+  .container {
+      gap: 30px;
+  }
+  .whyVolunteer {
+      margin-top: 30px;
+      padding-top: 20px;
+  }
+  .form label {
+      font-size: 0.9rem;
+  }
+  .inputField,
+  .textarea {
+      padding: 14px 18px;
+      font-size: 0.95rem;
+      margin-bottom: 15px; /* Ajusta margem inferior */
+  }
+  .checkboxGroup {
+       gap: 10px; /* Reduz espaço entre checkboxes */
+       margin-bottom: 15px; /* Ajusta margem inferior */
+       flex-direction: column; /* Pode ser útil empilhar checkboxes */
+       align-items: flex-start; /* Alinha checkboxes à esquerda se empilhados */
+  }
+  .checkboxGroup label {
+      font-size: 0.95rem;
+  }
+  .submitButton {
+      width: 100%; /* Botão volta a 100% */
+      padding: 14px 18px;
+      font-size: 0.95rem;
+  }
+}
