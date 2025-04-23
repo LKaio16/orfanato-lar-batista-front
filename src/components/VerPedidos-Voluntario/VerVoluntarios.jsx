@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styles from './vervoluntarios.module.css';
+import styles from './VerVoluntarios.module.css';
 // Importe componentes de feedback se tiver (ex: LoadingSpinner, ErrorMessage)
 // import LoadingSpinner from '../LoadingSpinner';
 // import ErrorMessage from '../ErrorMessage';
