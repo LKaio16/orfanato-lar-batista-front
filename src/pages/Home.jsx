@@ -1,10 +1,7 @@
 import Navbar from '../components/navbar/navbar';
-import Sobre from './../components/Sobre/Sobre';
 import SobreNos from '../components/SobreNos/SobreNos';
-import VideoContainer from './../components/video/videocontainer';
 import HeroSection from '../components/HeroSection/HeroSection';
 import UltimasNoticias from '../components/ultimanoticia/ultimasnoticias';
-import MeioContato from '../components/Contato/meiocontato'
 import WhatsAppWiper from '../components/whatsappwiper/whatsappwiper';
 import InstagramWiper from '../components/Instagramwiper/Instagramwiper';
 import { useIdioma } from '../context/IdiomaContext';
