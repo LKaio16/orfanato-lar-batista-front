@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./ultimasNoticias.module.css"; // Usaremos este arquivo CSS
+import styles from "./ultimasnoticias.module.css"; // Usaremos este arquivo CSS
 import { useNavigate } from "react-router-dom";
 
 const UltimasNoticias = () => {
