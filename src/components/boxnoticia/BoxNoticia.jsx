@@ -1,10 +1,10 @@
 import React from "react";
-import styles from "./BoxNoticia.module.css";
+import styles from "./boxNoticia.module.css";
 import { DateTime } from "luxon";
 
 
 const BoxNoticia = ({ titulo, descricao, data, cor, finalizado }) => {
-  const dataFormatada = DateTime.fromISO(data, { zone: "America/Sao_Paulo",  locale: "pt-BR"  }).toFormat("dd 'de' LLLL 'de' yyyy");
+  const dataFormatada = DateTime.fromISO(data, { zone: "America/Sao_Paulo", locale: "pt-BR" }).toFormat("dd 'de' LLLL 'de' yyyy");
 
 
   return (
