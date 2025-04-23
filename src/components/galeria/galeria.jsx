@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './Galeria.module.css';
+import styles from './galeria.module.css';
 import axios from 'axios';
 
 function Galeria() {
