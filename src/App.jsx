@@ -24,7 +24,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<Navigate to="/home" />} />
-        <Route path="/home" element={<Home t={t} />} />
+        {/* <Route path="/home" element={<Home t={t} />} /> */}
         <Route path="/doações" element={<Doacoes t={t} />} />
         <Route path="/SejaVoluntario" element={<SejaVoluntario t={t} />} />
         <Route path="/Galeria" element={<Galeria t={t} />} />
@@ -39,7 +39,7 @@ function App() {
           <Route path="/visualizar-contatos" element={<VisualizarContatos />} />
         </Route>
 
-        <Route path="*" element={<Home t={t} />} />
+        <Route path="/home" element={<Home t={t} />} />
       </Routes>
     </Router>
   );
