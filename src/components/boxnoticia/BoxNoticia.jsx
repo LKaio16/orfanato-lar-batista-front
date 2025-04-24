@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./boxNoticia.module.css";
+import styles from "./boxnoticia.module.css";
 import { DateTime } from "luxon";
 
 
