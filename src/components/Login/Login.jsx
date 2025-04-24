@@ -1,67 +1,62 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styles from "./Login.module.css";
-import axios from 'axios'; // Importe o axios
+import axios from 'axios';
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+const LOGIN_ENDPOINT = `${API_BASE_URL}/auth/login`;
 
 const Login = () => {
+  // Estados
   const [nome, setNome] = useState("");
   const [senha, setSenha] = useState("");
-  const [erroLogin, setErroLogin] = useState(""); // Estado unificado para mensagens de erro
-  const [isLoading, setIsLoading] = useState(false); // Estado para indicar carregamento
+  const [erroLogin, setErroLogin] = useState(""); // Mensagem de erro
+  const [isLoading, setIsLoading] = useState(false); // Estado de carregamento
 
   const navigate = useNavigate();
 
+  // Lida com o processo de login
   const handleLogin = async (e) => {
     e.preventDefault();
-    setErroLogin(""); // Limpa erros anteriores
-    setIsLoading(true); // Inicia o carregamento
+    setErroLogin("");
+    setIsLoading(true);
 
     try {
-      // Requisição POST para o endpoint de login do backend
-      const response = await axios.post('http://localhost:8080/api/auth/login', {
+      // Requisição POST para o endpoint de login
+      const response = await axios.post(LOGIN_ENDPOINT, {
         nome: nome,
         senha: senha
       });
 
       // Verifica se a requisição foi bem-sucedida (status 2xx)
       if (response.status >= 200 && response.status < 300) {
-        const usuarioLogado = response.data; // A resposta deve ser o UsuarioResponseDTO
+        const usuarioLogado = response.data;
 
-        // Armazena as informações do usuário (ex: id e nome)
-        // É recomendado não armazenar informações sensíveis como a senha aqui.
-        // O ideal seria um token JWT, mas para este exemplo, armazenamos o id e nome.
+        // Armazena informações do usuário (idealmente um token JWT)
         localStorage.setItem("usuarioLogado", JSON.stringify(usuarioLogado));
 
         // Navega para o dashboard
         navigate("/dashboard");
       } else {
-        // Embora o backend com Spring Security deva retornar erros com status apropriados,
-        // este else é um fallback. A lógica de catch abaixo lidará melhor com 4xx e 5xx.
+        // Fallback para outros status 2xx, embora 401 seja esperado para falha
         setErroLogin("Erro na resposta do servidor.");
       }
 
     } catch (err) {
       console.error("Erro de login:", err);
-      // Captura erros da requisição (status 4xx, 5xx, etc.)
+      // Lida com diferentes tipos de erro da requisição
       if (err.response) {
-        // Se houver resposta do servidor (erro HTTP)
-        if (err.response.status === 401) {
-          // Erro de autenticação (Usuário não encontrado ou Senha incorreta)
-          // O backend idealmente retornaria uma mensagem específica aqui
-          setErroLogin(err.response.data.message || "Usuário ou senha incorretos.");
-        } else {
-          // Outros erros do servidor
-          setErroLogin("Erro no servidor. Tente novamente mais tarde.");
-        }
+        // Erro do servidor (ex: 401 Unauthorized)
+        setErroLogin(err.response.data.message || "Usuário ou senha incorretos.");
       } else if (err.request) {
-        // A requisição foi feita, mas nenhuma resposta foi recebida
+        // Erro de conexão
         setErroLogin("Erro de conexão. Verifique sua rede.");
       } else {
-        // Algo aconteceu na configuração da requisição que disparou um erro
+        // Erro inesperado
         setErroLogin("Ocorreu um erro inesperado. Contate o suporte.");
       }
     } finally {
-      setIsLoading(false); // Finaliza o carregamento
+      setIsLoading(false);
     }
   };
 
@@ -70,7 +65,7 @@ const Login = () => {
       <form onSubmit={handleLogin} className={styles.form}>
         <h2 className={styles.title}>Login</h2>
 
-        <div className={styles.formGroup}> {/* Adiciona um contêiner para label e input */}
+        <div className={styles.formGroup}>
           <label className={styles.label}>
             Nome de usuário
           </label>
@@ -82,9 +77,9 @@ const Login = () => {
             required
             disabled={isLoading}
           />
-        </div> {/* Fim do formGroup */}
+        </div>
 
-        <div className={styles.formGroup}> {/* Adiciona um contêiner para label e input */}
+        <div className={styles.formGroup}>
           <label className={styles.label}>
             Senha
           </label>
@@ -96,14 +91,13 @@ const Login = () => {
             required
             disabled={isLoading}
           />
-        </div> {/* Fim do formGroup */}
+        </div>
 
-
-        {/* Exibe a mensagem de erro unificada */}
+        {/* Exibe a mensagem de erro */}
         {erroLogin && <p className={styles.error}>{erroLogin}</p>}
 
         <button type="submit" className={styles.button} disabled={isLoading}>
-          {isLoading ? 'Entrando...' : 'Entrar'} {/* Texto do botão muda ao carregar */}
+          {isLoading ? 'Entrando...' : 'Entrar'}
         </button>
       </form>
     </div>

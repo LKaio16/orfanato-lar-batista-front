@@ -1,122 +1,111 @@
 import { useEffect, useState } from 'react';
 import styles from './CriarNoticia.module.css';
-import axios from 'axios'; // Importe o axios
+import axios from 'axios';
 
-// URL base da API de notícias no seu backend Spring Boot
-const API_BASE_URL = 'http://localhost:8080/api/noticias';
+// URL base da API usando variável de ambiente com fallback
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+// Endpoint específico para notícias
+const NOTICIAS_ENDPOINT = `${API_BASE_URL}/noticias`;
 
 function CriarNoticia() {
-  // Estado para armazenar a lista de notícias
+  // Estado para lista de notícias
   const [noticias, setNoticias] = useState([]);
-  // Estado para controlar os dados do formulário (usando 'nome' em vez de 'titulo')
+  // Estado para dados do formulário
   const [form, setForm] = useState({
-    nome: '', // Alterado de 'titulo' para 'nome' para corresponder ao backend
+    nome: '',
     descricao: '',
-    data: '' // Formato YYYY-MM-DD esperado pelo input type="date" e geralmente compatível com backends
+    data: ''
   });
 
-  // Estados para feedback ao usuário
-  const [isLoading, setIsLoading] = useState(false); // Indica se uma requisição está em andamento
-  const [error, setError] = useState(null); // Armazena mensagens de erro
-  const [successMessage, setSuccessMessage] = useState(null); // Armazena mensagens de sucesso
+  // Estados para feedback do usuário
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
 
-  // Função para buscar as notícias do backend
+  // Busca notícias do backend
   const fetchNoticias = async () => {
-    setIsLoading(true); // Inicia o carregamento
-    setError(null); // Limpa erros anteriores
-    setSuccessMessage(null); // Limpa mensagens de sucesso anteriores
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
 
     try {
-      const response = await axios.get(API_BASE_URL);
-      // A resposta do backend é uma lista de objetos Noticias
+      const response = await axios.get(NOTICIAS_ENDPOINT);
       setNoticias(response.data);
     } catch (err) {
       console.error('Erro ao buscar notícias:', err);
-      // Exibe uma mensagem de erro amigável
       setError('Erro ao carregar notícias. Tente novamente mais tarde.');
     } finally {
-      setIsLoading(false); // Finaliza o carregamento
+      setIsLoading(false);
     }
   };
 
-  // Efeito para carregar as notícias ao montar o componente
+  // Carrega notícias ao montar o componente
   useEffect(() => {
     fetchNoticias();
-  }, []); // O array vazio garante que roda apenas uma vez ao montar
+  }, []);
 
-  // Lida com a mudança nos campos do formulário
+  // Lida com mudança nos campos do formulário
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // Limpa mensagens de status ao começar a digitar
     setError(null);
     setSuccessMessage(null);
   };
 
-  // Lida com o envio do formulário para criar uma nova notícia
+  // Envia o formulário para criar notícia
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsLoading(true); // Inicia o carregamento
-    setError(null); // Limpa erros anteriores
-    setSuccessMessage(null); // Limpa mensagens de sucesso anteriores
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
 
     try {
-      // Envia os dados do formulário como um objeto Noticias para o backend
-      const response = await axios.post(API_BASE_URL, form);
+      const response = await axios.post(NOTICIAS_ENDPOINT, form);
 
-      // Verifica se a criação foi bem-sucedida (status 201 Created)
       if (response.status === 201) {
-        setSuccessMessage('Notícia criada com sucesso!'); // Define mensagem de sucesso
-        setForm({ nome: '', descricao: '', data: '' }); // Limpa o formulário
-        fetchNoticias(); // Recarrega a lista de notícias
+        setSuccessMessage('Notícia criada com sucesso!');
+        setForm({ nome: '', descricao: '', data: '' });
+        fetchNoticias();
       } else {
-        // Lida com outros status 2xx que não 201, embora o backend retorne 201
         setError('Resposta inesperada do servidor ao criar notícia.');
       }
 
     } catch (err) {
       console.error('Erro ao criar notícia:', err);
-      // Lida com erros do backend (ex: validação, erro interno)
-      if (err.response && err.response.data && err.response.data.message) {
-        // Se o backend retornar uma mensagem de erro específica
+      if (err.response?.data?.message) {
         setError(`Erro: ${err.response.data.message}`);
       } else {
-        // Mensagem de erro genérica
         setError('Erro ao criar notícia. Verifique os dados e tente novamente.');
       }
     } finally {
-      setIsLoading(false); // Finaliza o carregamento
+      setIsLoading(false);
     }
   };
 
   // Lida com a exclusão de uma notícia
   const handleDelete = async (id) => {
-    setIsLoading(true); // Inicia o carregamento
-    setError(null); // Limpa erros anteriores
-    setSuccessMessage(null); // Limpa mensagens de sucesso anteriores
+    setIsLoading(true);
+    setError(null);
+    setSuccessMessage(null);
 
     try {
-      // Envia a requisição DELETE para o ID específico
-      const response = await axios.delete(`${API_BASE_URL}/${id}`);
+      const response = await axios.delete(`${NOTICIAS_ENDPOINT}/${id}`);
 
-      // Verifica se a exclusão foi bem-sucedida (status 204 No Content)
       if (response.status === 204) {
-        setSuccessMessage('Notícia removida com sucesso!'); // Define mensagem de sucesso
-        fetchNoticias(); // Recarrega a lista de notícias
+        setSuccessMessage('Notícia removida com sucesso!');
+        setNoticias(noticias.filter((n) => n.id !== id)); // Atualiza estado localmente
       } else {
-        // Lida com outros status 2xx que não 204
         setError('Resposta inesperada do servidor ao remover notícia.');
       }
 
     } catch (err) {
       console.error('Erro ao remover notícia:', err);
-      // Lida com erros do backend (ex: notícia não encontrada)
-      if (err.response && err.response.data && err.response.data.message) {
-        setError(`Erro: ${err.response.data.message}`);
+      if (err.response?.data?.message) {
+        setError(`Erro ao remover: ${err.response.data.message}`);
       } else {
         setError('Erro ao remover notícia. Tente novamente.');
       }
     } finally {
-      setIsLoading(false); // Finaliza o carregamento
+      setIsLoading(false);
     }
   };
 
@@ -124,21 +113,20 @@ function CriarNoticia() {
     <div className={styles.container}>
       <h2>Notícias</h2>
 
-      {/* Exibe mensagens de status */}
+      {/* Mensagens de status */}
       {isLoading && <p>Carregando...</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
       {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
 
-
       <form className={styles.form} onSubmit={handleSubmit}>
         <input
           type="text"
-          name="nome" // Alterado para 'nome'
+          name="nome"
           placeholder="Título"
-          value={form.nome} // Alterado para form.nome
+          value={form.nome}
           onChange={handleChange}
           required
-          disabled={isLoading} // Desabilita enquanto carrega
+          disabled={isLoading}
         />
         <textarea
           name="descricao"
@@ -146,7 +134,7 @@ function CriarNoticia() {
           value={form.descricao}
           onChange={handleChange}
           required
-          disabled={isLoading} // Desabilita enquanto carrega
+          disabled={isLoading}
         />
         <input
           type="date"
@@ -154,18 +142,17 @@ function CriarNoticia() {
           value={form.data}
           onChange={handleChange}
           required
-          disabled={isLoading} // Desabilita enquanto carrega
+          disabled={isLoading}
         />
         <button type="submit" disabled={isLoading}>
-          {isLoading ? 'Salvando...' : 'Adicionar Notícia'} {/* Texto do botão com estado de loading */}
+          {isLoading ? 'Salvando...' : 'Adicionar Notícia'}
         </button>
       </form>
 
       <ul className={styles.lista}>
-        {/* Exibe a lista de notícias se não estiver carregando e não houver erro */}
+        {/* Exibe a lista de notícias se não estiver carregando/com erro */}
         {!isLoading && !error && noticias.map(noticia => (
           <li key={noticia.id}>
-            {/* Usa noticia.nome para o título */}
             <h3>{noticia.nome}</h3>
             <p>{noticia.descricao}</p>
             <span>{noticia.data}</span>

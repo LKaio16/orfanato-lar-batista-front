@@ -4,6 +4,11 @@ import styles from './containervoluntario.module.css'; // Importe seu CSS Module
 import { useIdioma } from '../../context/IdiomaContext'; // Importar o hook de idioma
 import traducoes from '../../translations/traducoes'; // Importar o arquivo de traduções
 
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+const VOLUNTARIOS_ENDPOINT = `${API_BASE_URL}/voluntarios`;
+
+
 const ContainerVoluntario = () => {
   const { idioma } = useIdioma(); // Usar o hook para obter o idioma atual
   const t = traducoes[idioma]; // Acessar as traduções para o idioma atual
@@ -47,7 +52,8 @@ const ContainerVoluntario = () => {
     setMensagemEnviada(false);
 
     try {
-      await axios.post('http://localhost:8080/api/voluntarios', {
+      // Use a constante do endpoint aqui
+      await axios.post(VOLUNTARIOS_ENDPOINT, {
         ...formData,
         // dataEnvio will be automatically set by the backend
       });

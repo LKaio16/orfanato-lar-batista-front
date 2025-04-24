@@ -1,48 +1,61 @@
 import React, { useEffect, useState } from "react";
-import styles from "./ultimasnoticias.module.css"; // Usaremos este arquivo CSS
+import styles from "./ultimasnoticias.module.css";
 import { useNavigate } from "react-router-dom";
+import axios from 'axios';
+
+
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+const NOTICIAS_ENDPOINT = `${API_BASE_URL}/noticias`;
 
 const UltimasNoticias = () => {
+  // Estados
   const [noticias, setNoticias] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado para indicar carregamento
-  const [error, setError] = useState(null); // Estado para guardar erros
+  const [loading, setLoading] = useState(true); // Indica carregamento
+  const [error, setError] = useState(null); // Guarda erros
+
   const navigate = useNavigate();
 
+  // Busca e processa as últimas notícias ao montar o componente
   useEffect(() => {
-    fetch("http://localhost:8080/api/noticias")
-      .then((res) => {
-        if (!res.ok) {
-          throw new Error(`Erro HTTP: ${res.status}`); // Melhora o tratamento de erro
-        }
-        return res.json();
-      })
-      .then((data) => {
-        // Ordena as notícias pela data mais recente primeiro
-        // e pega as 3 primeiras
-        const noticiasMaisRecentes = data
-          // Certifique-se que a data é válida antes de comparar
+    const fetchUltimasNoticias = async () => {
+      setLoading(true);
+      setError(null);
+
+      try {
+        const response = await axios.get(NOTICIAS_ENDPOINT);
+
+        // Ordena as notícias pela data mais recente e pega as 3 primeiras
+        const noticiasMaisRecentes = response.data
           .filter(noticia => !isNaN(new Date(noticia.data).getTime()))
           .sort((a, b) => new Date(b.data) - new Date(a.data))
           .slice(0, 3);
+
         setNoticias(noticiasMaisRecentes);
-        setLoading(false); // Terminou de carregar
-      })
-      .catch((err) => {
+
+      } catch (err) {
         console.error("Erro ao carregar notícias:", err);
-        setError("Não foi possível carregar as notícias."); // Mensagem de erro para o usuário
-        setLoading(false); // Terminou de carregar (com erro)
-      });
-  }, []); // Array de dependências vazio para rodar só na montagem
+        if (err.response?.data?.message) {
+          setError(`Erro: ${err.response.data.message}`);
+        } else {
+          setError("Não foi possível carregar as últimas notícias.");
+        }
+      } finally {
+        setLoading(false); // Finaliza o carregamento
+      }
+    };
+
+    fetchUltimasNoticias();
+
+  }, []);
 
   // Função para formatar a data para YYYY-MM-DD
   const formatDate = (dateString) => {
     try {
       const date = new Date(dateString);
-      // Verifica se a data é válida
       if (isNaN(date.getTime())) {
         return 'Data inválida';
       }
-      // 'sv-SE' locale convenientemente formata como YYYY-MM-DD
+      // 'sv-SE' locale formata como YYYY-MM-DD
       return date.toLocaleDateString('sv-SE');
     } catch (e) {
       console.error("Erro ao formatar data:", e);
@@ -55,7 +68,7 @@ const UltimasNoticias = () => {
       <div className={styles.container}>
         {/* Títulos */}
         <h2 className={styles.smallTitle}>NOS CONHEÇA</h2>
-        <h3 className={styles.bigTitle}>Ultimas Noticias</h3>
+        <h3 className={styles.bigTitle}>Últimas Notícias</h3> {/* Título ajustado */}
 
         {/* Exibe mensagem de carregamento */}
         {loading && <p>Carregando notícias...</p>}
@@ -64,32 +77,32 @@ const UltimasNoticias = () => {
         {error && <p className={styles.errorText}>{error}</p>}
 
         {/* Grid de Notícias (só exibe se não estiver carregando e não houver erro) */}
-        {!loading && !error && (
+        {!loading && !error && noticias.length > 0 && (
           <div className={styles.cardsContainer}>
             {noticias.map((noticia) => (
               <div key={noticia.id} className={styles.card}>
-                {/* Tag Azul */}
+                {/* Tag Azul (usando valor fixo ou de noticia.tag) */}
                 <div className={styles.cardTag}>
-                  {/* Usando uma tag fixa ou pegue de noticia.tag se existir */}
                   {noticia.tag || "NOTÍCIA"}
                 </div>
                 {/* Conteúdo do Card */}
-                <h4 className={styles.cardTitle}>{noticia.nome}</h4>
+                <h4 className={styles.cardTitle}>{noticia.nome}</h4> {/* Usar noticia.nome */}
                 <p className={styles.cardDate}>{formatDate(noticia.data)}</p>
               </div>
             ))}
           </div>
         )}
 
-        {/* Botão Ver Mais (exibe mesmo se não houver notícias, mas não durante erro/loading inicial) */}
+        {/* Mensagem se não houver notícias e não estiver carregando/com erro */}
+        {!loading && !error && noticias.length === 0 && (
+          <p>Nenhuma notícia encontrada.</p>
+        )}
+
+
+        {/* Botão Ver Mais (exibe se não estiver carregando/com erro e houver notícias) */}
         {!loading && !error && noticias.length > 0 && (
           <button className={styles.verMaisButton} onClick={() => { navigate("/noticias") }}>VER MAIS</button>
         )}
-        {/* Opcional: Mostrar botão mesmo sem notícias?
-                 {!loading && !error && (
-                     <button className={styles.verMaisButton}>VER MAIS</button>
-                 )}
-                 */}
       </div>
     </section>
   );
