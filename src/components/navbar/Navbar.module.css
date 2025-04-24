@@ -1,3 +1,5 @@
+/* navbar.module.css */
+
 .navbar {
   display: flex;
   align-items: center;
@@ -6,10 +8,10 @@
   background-color: #fff;
   position: sticky;
   top: 0;
-  
+
   z-index: 100;
   transition: all 0.3s ease;
-  
+
 }
 
 .navbar.scrolling {
@@ -26,17 +28,25 @@
 /* Logo mobile (inicialmente escondida) */
 .logoMobile {
   display: none;
+  /* Escondida por padrão */
   position: fixed;
+  /* Posição fixa em mobile */
   top: 20px;
+  /* Posição do topo */
   left: 20px;
+  /* Posição da esquerda */
   z-index: 102;
+  /* Z-index alto para ficar acima de tudo */
   opacity: 0;
+  /* Inicialmente transparente */
   transition: opacity 0.3s ease;
+  /* Transição suave */
 }
 
 /* Quando o menu está aberto, mostra a logo mobile */
 .logoMobile.menuLogoVisible {
   opacity: 1;
+  /* Fica visível */
 }
 
 .navLeft {
@@ -44,6 +54,7 @@
   align-items: center;
   gap: 40px;
   z-index: 101;
+  /* Z-index alto */
 }
 
 .logo {
@@ -75,7 +86,7 @@
   content: "";
   position: absolute;
   left: 0;
-  bottom: -2px; 
+  bottom: -2px;
   width: 0%;
   height: 2px;
   background-color: #00c60d;
@@ -95,6 +106,7 @@
   align-items: center;
   gap: 20px;
   z-index: 101;
+  /* Z-index alto */
 }
 
 .donateBtn {
@@ -146,6 +158,7 @@
   flex-direction: column;
   min-width: 80px;
   z-index: 102;
+  /* Z-index alto */
 }
 
 .langOption {
@@ -166,6 +179,7 @@
 
 .menuToggle {
   display: none;
+  /* Escondido por padrão em desktop */
   width: 30px;
   height: 24px;
   position: relative;
@@ -173,6 +187,7 @@
   border: none;
   cursor: pointer;
   z-index: 101;
+  /* Z-index alto */
   padding: 0;
 }
 
@@ -201,8 +216,9 @@
   top: 20px;
 }
 
+/* Estilos do botão toggle quando o menu está ativo (transforma em X) */
 .menuToggle.menuActive span:nth-child(1) {
-  top: 10px;
+  top: 40px;
   transform: rotate(45deg);
 }
 
@@ -211,10 +227,11 @@
 }
 
 .menuToggle.menuActive span:nth-child(3) {
-  top: 10px;
+  top: 40px;
   transform: rotate(-45deg);
 }
 
+/* Estilos para o overlay do menu */
 .menuOverlay {
   position: fixed;
   top: 0;
@@ -223,39 +240,59 @@
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
   z-index: 99;
+  /* Abaixo do menu lateral e do botão toggle */
   opacity: 0;
   visibility: hidden;
+  /* Inicialmente escondido e não interativo */
   transition: all 0.3s ease;
 }
 
-.menuOverlay {
+/* Quando o menu está aberto, o overlay fica visível e interativo */
+.menuOverlay.menuOpen {
   opacity: 1;
   visibility: visible;
+  /* Torna visível e clicável */
 }
+
 
 @media screen and (max-width: 880px) {
   .navbar {
     padding: 12px 20px;
   }
-  
+
   .logoDesktop {
     position: relative;
-    z-index: 101;
+    z-index: 1;
   }
-  
+
   .logoMobile {
     display: block;
+    /* Mostra a logo mobile */
   }
-  
+
   .menuToggle {
     display: block;
+    /* Mostra o botão toggle */
     order: 2;
   }
-  
+
+  /* Estilos para o botão toggle quando o menu está ativo (em mobile) */
+  .menuToggle.menuActive {
+    position: fixed;
+    /* Torna o botão fixo na tela */
+    top: 20px;
+    /* Posição do topo (ajuste conforme necessário) */
+    right: 20px;
+    /* Posição da direita (ajuste conforme necessário) */
+    z-index: 102;
+    /* Z-index alto para ficar acima do menu */
+  }
+
+
   .navLeft {
     gap: 0;
   }
-  
+
   .navLinks {
     position: fixed;
     top: 0;
@@ -272,13 +309,14 @@
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     z-index: 100;
+    /* Z-index entre o overlay e o botão toggle */
     gap: 20px;
   }
-  
+
   .navLinks.menuOpen {
     transform: translateX(0);
   }
-  
+
   .navRight {
     position: fixed;
     bottom: 50px;
@@ -290,28 +328,48 @@
     transform: translateX(-100%);
     transition: transform 0.3s ease;
     flex-direction: column-reverse;
+    z-index: 100;
+    /* Mesmo z-index dos links */
   }
-  
+
   .navRight.menuOpen {
     transform: translateX(0);
     left: 30px;
   }
-  
+
   .link {
     font-size: 16px;
     padding: 10px 0;
     width: 100%;
     text-align: left;
   }
-  
+
   .donateBtn {
     width: 100%;
     margin-bottom: 20px;
   }
-  
+
   .LinguagemSelector {
     width: 100%;
     display: flex;
     justify-content: flex-end;
+  }
+}
+
+/* Ajuste para telas menores que 880px */
+@media screen and (max-width: 576px) {
+
+  /* Ajuste a posição fixa do botão toggle se necessário */
+  .menuToggle.menuActive {
+    top: 15px;
+    /* Exemplo: ajustar um pouco mais para cima */
+    right: 15px;
+    /* Exemplo: ajustar um pouco mais para a esquerda */
+  }
+
+  /* Ajuste a posição da logo mobile se necessário */
+  .logoMobile {
+    top: 15px;
+    left: 15px;
   }
 }

@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
 import styles from './Navbar.module.css';
 import traducoes from '../../translations/traducoes';
-import logo from '/assets/logo.png';
-import BR from '/assets/br.jpeg';
+import logo from '/assets/logo.png'; // Verifique o caminho correto da logo
+import BR from '/assets/br.jpeg'; // Verifique o caminho correto das bandeiras
 import EN from '/assets/eua.png';
 import ES from '/assets/esp.png';
 import { FaChevronDown } from 'react-icons/fa';
@@ -26,11 +26,12 @@ export default function Navbar() {
     if (menuAberto) setMenuAberto(false); // Fecha o menu se estiver aberto
   };
 
+  // Função para alternar o estado do menu
   const toggleMenu = () => {
     setMenuAberto(!menuAberto);
-
   };
 
+  // Efeito para controlar a classe 'scrolling' na navbar
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolling(window.scrollY > 10);
@@ -44,16 +45,24 @@ export default function Navbar() {
     <>
       <header className={`${styles.navbar} ${isScrolling ? styles.scrolling : ''}`}>
         <div className={styles.navLeft}>
-          <img src={logo} alt="Logo" className={`${styles.logo} ${styles.logoDesktop}`} onClick={() => { navigate("/home") }} />
-          <img src={logo} alt="Logo" className={`${styles.logo} ${styles.logoMobile} ${menuAberto ? styles.menuLogoVisible : ''}`} />
+          {/* Logo Desktop */}
+          <img src={logo} alt="Logo" className={`${styles.logo} ${styles.logoDesktop}`} onClick={() => { navigate("/"); setMenuAberto(false); }} /> {/* Link para a Home */}
 
+          {/* Logo Mobile (visível apenas quando o menu está aberto em mobile) */}
+          {/* A visibilidade da logo mobile é controlada pelo CSS na media query */}
+          {/* A classe menuLogoVisible controla a opacidade quando o menu está aberto */}
+          <img src={logo} alt="Logo" className={`${styles.logo} ${styles.logoMobile} ${menuAberto ? styles.menuLogoVisible : ''}`} onClick={() => { navigate("/"); setMenuAberto(false); }} /> {/* Link para a Home */}
+
+
+          {/* Links de Navegação */}
           <nav className={`${styles.navLinks} ${menuAberto ? styles.menuOpen : ''}`}>
             <button className={styles.link} onClick={() => { navigate("/"); setMenuAberto(false); }}>
               {t.Home}
             </button>
-            {/*  <button className={styles.link} onClick={() => { navigate("/sobre"); setMenuAberto(false); }}>
-              {t.Sobre}
-            </button> */}
+            {/*  Seção Sobre Nós comentada, descomente se precisar */}
+            {/*  <button className={styles.link} onClick={() => { navigate("/sobre"); setMenuAberto(false); }}>
+              {t.Sobre}
+            </button> */}
             <button className={styles.link} onClick={() => { navigate("/noticias"); setMenuAberto(false); }}>
               {t.Notícias}
             </button>
@@ -66,7 +75,9 @@ export default function Navbar() {
           </nav>
         </div>
 
+        {/* Seção Direita (Botão Doar e Seletor de Idioma) */}
         <div className={`${styles.navRight} ${menuAberto ? styles.menuOpen : ''}`}>
+          {/* Botão Doar */}
           <button
             className={styles.donateBtn}
             onClick={() => { navigate("/doações"); setMenuAberto(false); }}
@@ -74,7 +85,9 @@ export default function Navbar() {
             {t.Doar}
           </button>
 
+          {/* Seletor de Idioma */}
           <div className={styles.LinguagemSelector}>
+            {/* Botão que exibe o idioma atual e abre o dropdown */}
             <button
               className={styles.langButton}
               onClick={() => setMostrarIdiomas(!mostrarIdiomas)}
@@ -83,13 +96,17 @@ export default function Navbar() {
               <FaChevronDown fill='black' />
             </button>
 
+            {/* Dropdown de opções de idioma */}
             <div className={`${styles.langDropdown} ${mostrarIdiomas ? styles.showDropdown : ''}`}>
+              {/* Opção Português */}
               <div className={styles.langOption} onClick={() => handleTrocarIdioma('BR')}>
                 <img src={BR} alt="Português" width={24} height={16} /> BR
               </div>
+              {/* Opção Inglês */}
               <div className={styles.langOption} onClick={() => handleTrocarIdioma('EN')}>
                 <img src={EN} alt="Inglês" width={24} height={16} /> EN
               </div>
+              {/* Opção Espanhol */}
               <div className={styles.langOption} onClick={() => handleTrocarIdioma('ES')}>
                 <img src={ES} alt="Espanhol" width={24} height={16} /> ES
               </div>
@@ -97,6 +114,7 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* Botão Toggle do Menu Mobile */}
         <button
           className={`${styles.menuToggle} ${menuAberto ? styles.menuActive : ''}`}
           onClick={toggleMenu}
@@ -107,9 +125,11 @@ export default function Navbar() {
           <span></span>
         </button>
 
+        {/* Overlay do Menu (clicável para fechar) */}
+        {/* Renderiza apenas quando o menuAberto é true */}
         {menuAberto && (
           <div
-            className={styles.menuOverlay}
+            className={`${styles.menuOverlay} ${menuAberto ? styles.menuOpen : ''}`}
             onClick={toggleMenu}
             role="button"
             tabIndex={0}
