@@ -20,6 +20,7 @@
 .logoDesktop {
   display: block;
   cursor: pointer;
+  z-index: 1;
 }
 
 /* Logo mobile (inicialmente escondida) */
