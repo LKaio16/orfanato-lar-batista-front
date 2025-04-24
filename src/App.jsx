@@ -39,7 +39,7 @@ function App() {
           <Route path="/visualizar-contatos" element={<VisualizarContatos />} />
         </Route>
 
-        <Route path="/home" element={<Home t={t} />} />
+        <Route path="/login" element={<Login />} />
       </Routes>
     </Router>
   );
