@@ -26,7 +26,7 @@ export default function HeroSection() {
 
                     <button
                         className={styles.donateButton}
-                        onClick={() => navigate("/doacoes")}
+                        onClick={() => navigate("/doações")}
                     >
                         {t.Doar}
                     </button>
