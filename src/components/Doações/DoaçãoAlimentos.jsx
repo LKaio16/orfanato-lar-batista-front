@@ -75,8 +75,12 @@ const DoacaoAlimentos = () => {
               <div className={styles.monetariaWrapper}> {/* Manter este wrapper se necessário */}
                 {/* Assumimos que BoxPix e BoxVakinha já lidam com suas próprias traduções */}
                 <BoxPix />
-                <div className={styles.monetariaSeparator}>{t.MonetariaSeparadorOU || 'OU'}</div> {/* Usar tradução para o separador */}
+
+                {/* 
+                <div className={styles.monetariaSeparator}>{t.MonetariaSeparadorOU || 'OU'}</div> {/* Usar tradução para o separador 
                 <BoxVakinha />
+                 */}
+
               </div>
             )}
 
