@@ -3,6 +3,9 @@ import styles from './Contato.module.css'; // Usaremos este CSS Module
 import { useIdioma } from '../../context/IdiomaContext'; // Importar o hook de idioma
 import traducoes from '../../translations/traducoes'; // Importar o arquivo de traduções
 
+// Define a URL base da API, seguindo o padrão do seu projeto
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8080/api';
+const CONTATO_ENDPOINT = `${API_BASE_URL}/contatos`; // O endpoint específico para contatos
 
 export default function Contato() {
     const { idioma } = useIdioma(); // Usar o hook para obter o idioma atual
@@ -39,33 +42,52 @@ export default function Contato() {
         setError(null);
         setMensagemEnviada(false);
 
-        console.log("Enviando dados:", formData); // Para depuração
+        console.log("Enviando dados para o backend:", formData); // Para depuração
 
-        // ============================================================
-        // AQUI VAI A SUA LÓGICA DE ENVIO PARA O BACKEND (FETCH/AXIOS)
-        // Exemplo simulado:
         try {
-            // Simula uma chamada de API que demora 1.5 segundos
-            await new Promise(resolve => setTimeout(resolve, 1500));
 
-            // Descomente a linha abaixo para simular um erro:
-            // throw new Error("Falha ao conectar com o servidor. Tente mais tarde.");
+            const response = await fetch(CONTATO_ENDPOINT, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData), // Envia os dados do formulário como JSON
+            });
 
-            // Se chegou aqui, o envio (simulado) foi bem-sucedido
+            // Verifica se a resposta foi bem-sucedida (status 2xx)
+            if (!response.ok) {
+                // Tenta ler o corpo da resposta para mais detalhes do erro
+                let errorMessage = t.ContatoMensagemErroPadrao;
+                try {
+                    const errorBody = await response.json();
+                    // Adapte isso dependendo da estrutura de erro que seu backend retorna
+                    errorMessage = errorBody.message || errorBody.error || errorMessage;
+                } catch (jsonError) {
+                    // Se não conseguir ler o JSON de erro, usa a mensagem padrão
+                    console.error("Erro ao parsear JSON de erro:", jsonError);
+                }
+                throw new Error(errorMessage);
+            }
+
+            // O backend retorna o objeto Contato criado com status 201
+            const contatoCriado = await response.json();
+            console.log("Contato enviado com sucesso:", contatoCriado);
+
+            // Se chegou aqui, o envio foi bem-sucedido
             setMensagemEnviada(true);
-            // Limpa o formulário
+
+            // Limpa o formulário apenas em caso de sucesso
             setFormData({
                 nome: '', empresa: '', telefone: '', email: '', assunto: '', mensagem: ''
             });
 
         } catch (err) {
-            console.error("Erro no envio:", err);
-            // Usa a mensagem de erro do catch ou a mensagem padrão traduzida
+            console.error("Erro no envio do formulário:", err);
+            // Usa a mensagem de erro capturada ou a mensagem padrão traduzida
             setError(err.message || t.ContatoMensagemErroPadrao);
         } finally {
             setIsLoading(false); // Termina o estado de carregamento
         }
-        // ============================================================
     };
 
     return (
@@ -186,7 +208,7 @@ export default function Contato() {
                         <button
                             type="submit"
                             className={styles.submitButton}
-                            disabled={isLoading}
+                            disabled={isLoading} // Desabilita o botão durante o envio
                         >
                             {/* Usar traduções para o texto do botão */}
                             {isLoading ? t.ContatoBotaoEnviando : t.ContatoBotaoEnviar}

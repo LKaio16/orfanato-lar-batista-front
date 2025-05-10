@@ -85,11 +85,11 @@ export default function Footer() {
                             <button className={styles.menuLink} onClick={() => handleNavigate("/Galeria")}>
                                 {t.Galeria}
                             </button>
-                            <button className={styles.menuLink} onClick={() => handleNavigate("/seja-voluntario")}> {/* Ajuste o path se necessário */}
+                            <button className={styles.menuLink} onClick={() => handleNavigate("/SejaVoluntario")}> {/* Ajuste o path se necessário */}
                                 {t.SejaVoluntario}
                             </button>
                             {/* Adicione o link "Como Doar" que você já tem no HeroSection */}
-                            <button className={styles.menuLink} onClick={() => handleNavigate("/doacoes")}> {/* Ajuste o path se necessário */}
+                            <button className={styles.menuLink} onClick={() => handleNavigate("/doações")}> {/* Ajuste o path se necessário */}
                                 {t.Doar}
                             </button>
                         </nav>
