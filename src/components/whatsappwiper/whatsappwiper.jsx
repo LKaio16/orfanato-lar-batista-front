@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './whatsappwiper.module.css';
 
 const WhatsAppWiper = () => {
-  const phoneNumber = "551132083074";
+  const phoneNumber = "5585998362091";
 
   return (
     <a
