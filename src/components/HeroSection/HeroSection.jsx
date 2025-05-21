@@ -34,7 +34,7 @@ export default function HeroSection() {
 
                 <div className={styles.imageContainer}>
                     <img
-                        src="/assets/hero-image.png"
+                        src="/assets/hero.png"
                         alt="Crianças no Lar Batista"
                         className={styles.heroImage}
                     />
